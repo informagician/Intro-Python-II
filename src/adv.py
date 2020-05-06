@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -37,7 +37,17 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 
+# print(room['outside'])
+# selection = input('Which direction do you want to go?')
+
 # Make a new player object that is currently in the 'outside' room.
+
+player = Player(room['outside'])
+
+# possible = {'n': room['outside'].n_to,'e':'e_to','s':'s_to','w':'w_to'}
+
+# print(possible[selection])
+# print(player.loc)
 
 # Write a loop that:
 #
@@ -49,3 +59,43 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+# while selection != 'q':
+#     print(room[player.loc])
+#     selection = input('Which direction do you want to go?')
+
+#     if room[player.loc].go(selection) != False:
+#         player.loc = room[player.loc].go(selection)
+#         print(player.loc)
+#     else:
+#         print('There is no room in that direction!')
+
+while True:
+
+    print(player.loc)
+    selection = input('Which direction do you want to go?')
+
+    if selection == 'q':
+        break
+    elif selection == 'n':
+        if player.loc != None:
+            player.loc = player.loc.n_to
+        else:
+            print('No rooms in that direction')
+    elif selection == 'e':
+        if player.loc != None:
+            player.loc = player.loc.e_to
+        else:
+            print('No rooms in that direction')
+    elif selection == 's':
+        if player.loc != None:
+            player.loc = player.loc.s_to
+        else:
+            print('No rooms in that direction')
+    elif selection == 'w':
+        if player.loc != None:
+            player.loc = player.loc.w_to
+        else:
+            print('No rooms in that direction')
+    else:
+        print("That is not a valid direction!")
