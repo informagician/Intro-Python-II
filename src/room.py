@@ -22,6 +22,6 @@ class Room:
 
     def itemsInRoom(self):
         if len(self.items) > 0:
-            print('\nItems in this room:')
+            print('------------------------------\nItems in this room:')
             for x in self.items:
                 print(x)

@@ -50,6 +50,8 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 
 player = Player(room['outside'])
+print(f'You are located at:\n{player.loc.name}\n{player.loc.description}')
+player.loc.itemsInRoom()
 
 # possible = {'n': room['outside'].n_to,'e':'e_to','s':'s_to','w':'w_to'}
 
@@ -81,16 +83,8 @@ verb = None
 obj = None
 
 while True:
-    print(player.loc.name)
-    print(player.loc.description)
-    # print(player.loc.items)
-    
-    player.loc.itemsInRoom()
-    # print(player.loc)
-    # if player.loc.name == 'Foyer':
-    #     for x in room['foyer'].items:
-    #         print(x)
-    selection = input('Which direction do you want to go?')
+    #print(f'You are located at:\n{player.loc.name}\n{player.loc.description}')
+    selection = input('What do you want to do?')
     
     if len(selection.split(' ')) > 1:
         cmd = selection.split(' ')
@@ -100,23 +94,31 @@ while True:
     if selection == 'q':
         break
     elif selection == 'n':
-        if player.loc != None:
+        if player.loc.n_to != None:
             player.loc = player.loc.n_to
+            print(f'You are located at:\n{player.loc.name}\n{player.loc.description}')
+            player.loc.itemsInRoom()
         else:
             print('No rooms in that direction')
     elif selection == 'e':
-        if player.loc != None:
+        if player.loc.e_to != None:
             player.loc = player.loc.e_to
+            print(f'You are located at:\n{player.loc.name}\n{player.loc.description}')
+            player.loc.itemsInRoom()
         else:
             print('No rooms in that direction')
     elif selection == 's':
-        if player.loc != None:
+        if player.loc.s_to != None:
             player.loc = player.loc.s_to
+            print(f'You are located at:\n{player.loc.name}\n{player.loc.description}')
+            player.loc.itemsInRoom()
         else:
             print('No rooms in that direction')
     elif selection == 'w':
-        if player.loc != None:
+        if player.loc.w_to != None:
             player.loc = player.loc.w_to
+            print(f'You are located at:\n{player.loc.name}\n{player.loc.description}')
+            player.loc.itemsInRoom()
         else:
             print('No rooms in that direction')
     elif selection == 'i':
