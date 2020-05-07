@@ -6,7 +6,7 @@ class Player:
         self.loc = loc
         self.items = []
 
-    def holding(self):
+    def inventory(self):
         if len(self.items) == 0:
             print('You are not holding anything')
         else:

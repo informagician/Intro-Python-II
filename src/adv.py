@@ -105,6 +105,6 @@ while True:
     elif selection == 'g':
         player.get(coin)
     elif selection == 'i':
-        player.holding()
+        player.inventory()
     else:
         print("That is not a valid direction!")
