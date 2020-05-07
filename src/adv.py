@@ -21,12 +21,12 @@ to north. The smell of gold permeates the air.""",[]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""",[]),
+earlier adventurers. The only exit is to the south.""",['coin']),
 }
 
 # Declare all items
 
-coin = Item('coin','gold coins')
+# coin = Item('coin','gold coins')
 
 
 # Link rooms together
@@ -83,11 +83,16 @@ obj = None
 while True:
     print(player.loc.name)
     print(player.loc.description)
-    if player.loc.name == 'Foyer':
-        print(room.items[0])
+    # print(player.loc.items)
+    
+    player.loc.itemsInRoom()
+    # print(player.loc)
+    # if player.loc.name == 'Foyer':
+    #     for x in room['foyer'].items:
+    #         print(x)
     selection = input('Which direction do you want to go?')
-
-    if  len(selection.split(' ')) > 1:
+    
+    if len(selection.split(' ')) > 1:
         cmd = selection.split(' ')
         verb = cmd[0]
         obj = cmd[1]
@@ -114,20 +119,16 @@ while True:
             player.loc = player.loc.w_to
         else:
             print('No rooms in that direction')
-    elif selection == 'g':
-        player.take(coin)
-    elif verb == 'take':
-        if room.items.count(obj) > 0:
+    elif selection == 'i':
+        player.inventory()
+    elif verb == 'get':
+        if obj in player.loc.items:
             player.take(obj)
-            room.items.remove(obj)
+            player.loc.items.remove(obj)
         else:
             print('Object not found in this room')
     elif verb == 'drop':
         player.drop(obj)
-        room.items.append(obj)
-
-    elif selection == 'i' or 'inventory':
-        player.inventory()
-
+        player.loc.items.append(obj)
     else:
         print("That is not a valid direction!")

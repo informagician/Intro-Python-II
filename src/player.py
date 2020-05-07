@@ -12,11 +12,11 @@ class Player:
         else:
             print("You are holding:")
             for i in self.items:
-                print(i.name)
+                print(i)
     
     def take(self,item):
         self.items.append(item)
-        print(f'You picked up a {item.name}')
+        print(f'You picked up a {item}')
 
     def drop(self,item):
         self.items.remove(item)
