@@ -9,7 +9,7 @@ class Room:
         self.e_to = None
         self.w_to = None
         self.s_to = None
-        self.items = []
+        self.items = None
 
     def __str__(self):
         return f"{self.name},{self.description}"

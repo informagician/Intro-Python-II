@@ -14,7 +14,7 @@ class Player:
             for i in self.items:
                 print(i.name)
     
-    def get(self,item):
+    def take(self,item):
         self.items.append(item)
         print(f'You picked up a {item.name}')
 

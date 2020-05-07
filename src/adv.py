@@ -5,21 +5,23 @@ from item import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons",
+                     []),
 
-    'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+    'foyer':    Room("Foyer", 
+                    """Dim light filters in from the south. Dusty passages run north and east.""",
+                    ['sword']),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""",[]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""",[]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""",[]),
 }
 
 # Declare all items
@@ -75,10 +77,20 @@ player = Player(room['outside'])
 #     else:
 #         print('There is no room in that direction!')
 
+verb = None
+obj = None
+
 while True:
     print(player.loc.name)
     print(player.loc.description)
+    if player.loc.name == 'Foyer':
+        print(room.items[0])
     selection = input('Which direction do you want to go?')
+
+    if  len(selection.split(' ')) > 1:
+        cmd = selection.split(' ')
+        verb = cmd[0]
+        obj = cmd[1]
 
     if selection == 'q':
         break
@@ -103,8 +115,19 @@ while True:
         else:
             print('No rooms in that direction')
     elif selection == 'g':
-        player.get(coin)
-    elif selection == 'i':
+        player.take(coin)
+    elif verb == 'take':
+        if room.items.count(obj) > 0:
+            player.take(obj)
+            room.items.remove(obj)
+        else:
+            print('Object not found in this room')
+    elif verb == 'drop':
+        player.drop(obj)
+        room.items.append(obj)
+
+    elif selection == 'i' or 'inventory':
         player.inventory()
+
     else:
         print("That is not a valid direction!")
