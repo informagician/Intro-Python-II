@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 # Declare all the rooms
 
 room = {
@@ -20,6 +21,10 @@ to north. The smell of gold permeates the air."""),
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
+
+# Declare all items
+
+coin = Item('coin','gold coins')
 
 
 # Link rooms together
@@ -71,8 +76,8 @@ player = Player(room['outside'])
 #         print('There is no room in that direction!')
 
 while True:
-
-    print(player.loc)
+    print(player.loc.name)
+    print(player.loc.description)
     selection = input('Which direction do you want to go?')
 
     if selection == 'q':
@@ -97,5 +102,9 @@ while True:
             player.loc = player.loc.w_to
         else:
             print('No rooms in that direction')
+    elif selection == 'g':
+        player.get(coin)
+    elif selection == 'i':
+        player.holding()
     else:
         print("That is not a valid direction!")

@@ -4,3 +4,19 @@
 class Player:
     def __init__(self, loc):
         self.loc = loc
+        self.items = []
+
+    def holding(self):
+        if len(self.items) == 0:
+            print('You are not holding anything')
+        else:
+            print("You are holding:")
+            for i in self.items:
+                print(i.name)
+    
+    def get(self,item):
+        self.items.append(item)
+        print(f'You picked up a {item.name}')
+
+    def drop(self,item):
+        self.items.remove(item)
